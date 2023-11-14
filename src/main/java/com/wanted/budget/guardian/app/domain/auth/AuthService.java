@@ -74,4 +74,11 @@ public class AuthService {
         return jwtTokenFactory.generateAccessToken(member);
     }
 
+    /**
+     * 리프레시 토큰 삭제
+     */
+    public void expirationRefreshToken(RefreshTokenRequestDto body) {
+        jwtTokenFactory.expirationRefreshToken(body.getRefreshToken());
+    }
+
 }
