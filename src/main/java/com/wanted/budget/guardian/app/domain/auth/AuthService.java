@@ -47,4 +47,19 @@ public class AuthService {
         return memberService.create(body);
     }
 
+    /**
+     * 액세스 토큰, 리프레시 토큰 생성
+     */
+    @Transactional
+    public TokenResponseDto generateAccessAndRefreshToken(LoginRequestDto body) {
+        Member foundMember = memberRepository.findByUsername(body.getUsername())
+            .orElseThrow(NoSuchUsernameException::new);
+
+        if (!passwordEncoder.matches(body.getPassword(), foundMember.getPassword())) {
+            throw new PasswordNotMatchException();
+        }
+
+        return jwtTokenFactory.generateJwtToken(foundMember);
+    }
+
 }
