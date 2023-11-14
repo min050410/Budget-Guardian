@@ -50,4 +50,13 @@ public class AuthController {
         return ResponseEntity.ok(authService.refreshAccessToken(body));
     }
 
+    @Operation(summary = "로그아웃")
+    @DeleteMapping(ApiPath.LOGOUT)
+    public ResponseEntity<Void> logout(
+        @Valid @RequestBody RefreshTokenRequestDto body
+    ) {
+        authService.expirationRefreshToken(body);
+        return ResponseEntity.ok().build();
+    }
+
 }
