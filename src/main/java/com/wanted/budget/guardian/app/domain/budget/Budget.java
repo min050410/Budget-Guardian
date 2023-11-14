@@ -41,7 +41,7 @@ public class Budget extends BaseCreateTimeEntity {
     private Category category;
 
     @Builder
-    public Budget(Long id, Long budgetAmount, Long perOfBudgetAmount, Member member,
+    public Budget(Long budgetAmount, Long perOfBudgetAmount, Member member,
         Category category) {
         this.budgetAmount = budgetAmount;
         this.perOfBudgetAmount = perOfBudgetAmount;
