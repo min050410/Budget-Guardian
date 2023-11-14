@@ -62,4 +62,16 @@ public class AuthService {
         return jwtTokenFactory.generateJwtToken(foundMember);
     }
 
+    /**
+     * 리프레시 토큰으로 액세스 토큰 생성
+     */
+    @Transactional(readOnly = true)
+    public AccessTokenResponseDto refreshAccessToken(RefreshTokenRequestDto body) {
+        RefreshToken refreshToken = jwtTokenFactory.findRefreshToken(body.getRefreshToken());
+        Member member = memberRepository.findById(refreshToken.getMemberId())
+            .orElseThrow(MemberNotFoundException::new);
+
+        return jwtTokenFactory.generateAccessToken(member);
+    }
+
 }

@@ -43,4 +43,11 @@ public class AuthController {
         return ResponseEntity.ok(authService.generateAccessAndRefreshToken(body));
     }
 
+    @Operation(summary = "액세스토큰 재발급")
+    @PostMapping(ApiPath.REFRESH_TOKEN)
+    public ResponseEntity<AccessTokenResponseDto> generateAccessToken(
+        @Valid @RequestBody RefreshTokenRequestDto body) {
+        return ResponseEntity.ok(authService.refreshAccessToken(body));
+    }
+
 }
