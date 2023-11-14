@@ -10,6 +10,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Entity
@@ -27,13 +28,13 @@ public class Member extends BaseCreateTimeEntity {
     @Column(length = 100, nullable = false)
     private String password;
 
+    @ColumnDefault("0L")
     private Long amount;
 
     @Builder
-    private Member(String username, String password, Long amount) {
+    private Member(String username, String password) {
         this.username = username;
         this.password = password;
-        this.amount = amount;
     }
 
 }
