@@ -12,4 +12,7 @@ public class ApiPath {
     public static final String VALIDATE_TOKEN = "/api/v1/oauth/validate";
     public static final String LOGOUT = "/api/v1/logout";
 
+    // 카테고리
+    public static final String CATEGORY = "/api/v1/category";
+
 }
