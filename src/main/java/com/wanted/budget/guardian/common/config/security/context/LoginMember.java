@@ -10,10 +10,10 @@ public class LoginMember {
 
     private final Long id;
 
-    private final String email;
+    private final String username;
 
-    public static LoginMember of(Long id, String email) {
-        return new LoginMember(id, email);
+    public static LoginMember of(Long id, String username) {
+        return new LoginMember(id, username);
     }
 
 }
