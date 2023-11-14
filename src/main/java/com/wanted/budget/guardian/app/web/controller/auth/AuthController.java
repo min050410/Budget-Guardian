@@ -36,4 +36,11 @@ public class AuthController {
         return ResponseEntity.ok(authService.signUp(body));
     }
 
+    @Operation(summary = "멤버 로그인")
+    @PostMapping(ApiPath.LOGIN)
+    public ResponseEntity<TokenResponseDto> login(
+        @Valid @RequestBody LoginRequestDto body) {
+        return ResponseEntity.ok(authService.generateAccessAndRefreshToken(body));
+    }
+
 }
