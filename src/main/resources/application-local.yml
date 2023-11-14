@@ -26,6 +26,9 @@ spring:
       port: ${budget.guardian.spring.data.redis.port}
       database: ${budget.guardian.spring.data.redis.database}
 
+budget-guardian:
+  host: ${budget.guardian.host}
+
 springdoc:
   swagger-ui:
     path: "/swagger-ui.html"
