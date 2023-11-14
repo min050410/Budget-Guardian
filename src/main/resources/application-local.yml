@@ -1,0 +1,31 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    hikari:
+      jdbc-url: ${budget.guardian.spring.datasource.url}
+      username: ${budget.guardian.spring.datasource.username}
+      password: ${budget.guardian.spring.datasource.password}
+
+  security:
+    jwt:
+      header: ${budget.guardian.spring.security.jwt.header}
+      sign-key: ${budget.guardian.spring.security.jwt.sign-key}
+      access-token-validity-in-seconds: ${budget.guardian.spring.security.jwt.access-token-validity-in-seconds}
+      refresh-token-validity-in-seconds: ${budget.guardian.spring.security.jwt.refresh-token-validity-in-seconds}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  data:
+    redis:
+      host: ${budget.guardian.spring.data.redis.host}
+      port: ${budget.guardian.spring.data.redis.port}
+      database: ${budget.guardian.spring.data.redis.database}
+
+springdoc:
+  swagger-ui:
+    path: "/swagger-ui.html"
