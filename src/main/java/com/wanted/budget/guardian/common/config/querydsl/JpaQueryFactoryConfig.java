@@ -1,4 +1,4 @@
-package common.config.querydsl;
+package com.wanted.budget.guardian.common.config.querydsl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

@@ -1,4 +1,4 @@
-package common.response;
+package com.wanted.budget.guardian.common.response;
 
 import java.util.List;
 import lombok.AllArgsConstructor;

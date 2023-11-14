@@ -1,4 +1,4 @@
-package common.response;
+package com.wanted.budget.guardian.common.response;
 
 import lombok.Builder;
 import lombok.Getter;

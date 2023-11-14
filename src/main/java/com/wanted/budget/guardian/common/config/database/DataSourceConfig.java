@@ -1,4 +1,4 @@
-package common.config.database;
+package com.wanted.budget.guardian.common.config.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

@@ -1,4 +1,4 @@
-package common.config.p6spy;
+package com.wanted.budget.guardian.common.config.p6spy;
 
 import com.p6spy.engine.common.ConnectionInformation;
 import com.p6spy.engine.event.JdbcEventListener;
