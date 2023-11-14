@@ -59,4 +59,10 @@ public class AuthController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "토큰 유효성 확인")
+    @GetMapping(ApiPath.VALIDATE_TOKEN)
+    public ResponseEntity<Void> validateToken(@AuthenticationPrincipal LoginMember loginMember) {
+        return ResponseEntity.ok().build();
+    }
+
 }
