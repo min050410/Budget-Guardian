@@ -15,4 +15,7 @@ public class ApiPath {
     // 카테고리
     public static final String CATEGORY = "/api/v1/category";
 
+    // 예산
+    public static final String BUDGET = "/api/v1/budget";
+
 }
