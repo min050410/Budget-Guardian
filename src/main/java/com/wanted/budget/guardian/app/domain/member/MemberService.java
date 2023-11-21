@@ -2,6 +2,7 @@ package com.wanted.budget.guardian.app.domain.member;
 
 import com.wanted.budget.guardian.app.web.dto.auth.SignUpRequestDto;
 import com.wanted.budget.guardian.app.web.dto.member.MemberIdResponseDto;
+import com.wanted.budget.guardian.common.config.security.context.LoginMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,16 @@ public class MemberService {
 
     private String encodePassword(String password) {
         return passwordEncoder.encode(password);
+    }
+
+    @Transactional(readOnly = true)
+    public Member findLoginMember(LoginMember loginMember) {
+        if (loginMember == null) {
+            return null;
+        }
+
+        Long loginMemberId = loginMember.getId();
+        return memberRepository.getReferenceById(loginMemberId);
     }
 
 }
