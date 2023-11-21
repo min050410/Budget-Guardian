@@ -1,9 +1,12 @@
 package com.wanted.budget.guardian.app.web.controller.budget;
 
 import com.wanted.budget.guardian.app.domain.budget.BudgetService;
+import com.wanted.budget.guardian.app.web.dto.budget.RecommendBudgetRequestDto;
+import com.wanted.budget.guardian.app.web.dto.budget.RecommendBudgetResponseDto;
 import com.wanted.budget.guardian.app.web.dto.budget.CreateBudgetRequestDto;
 import com.wanted.budget.guardian.app.web.path.ApiPath;
 import com.wanted.budget.guardian.common.config.security.context.LoginMember;
+import com.wanted.budget.guardian.common.response.ListResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -29,6 +32,14 @@ public class BudgetController {
     ) {
         budgetService.configureBudget(loginMember, body);
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "예산 추천")
+    @PostMapping(ApiPath.BUDGET_RECOMMEND)
+    public ResponseEntity<ListResponse<RecommendBudgetResponseDto>> recommendBudget(
+        @Valid @RequestBody RecommendBudgetRequestDto body
+    ) {
+        return ResponseEntity.ok(budgetService.recommendBudget(body));
     }
 
 }

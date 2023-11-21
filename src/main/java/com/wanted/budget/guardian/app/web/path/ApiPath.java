@@ -17,5 +17,6 @@ public class ApiPath {
 
     // 예산
     public static final String BUDGET = "/api/v1/budget";
+    public static final String BUDGET_RECOMMEND = "/api/v1/budget/recommend";
 
 }
