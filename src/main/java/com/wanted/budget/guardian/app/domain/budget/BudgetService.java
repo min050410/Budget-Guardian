@@ -6,8 +6,12 @@ import com.wanted.budget.guardian.app.domain.member.Member;
 import com.wanted.budget.guardian.app.domain.member.MemberService;
 import com.wanted.budget.guardian.app.web.dto.budget.CategoryByBudgetRequestDto;
 import com.wanted.budget.guardian.app.web.dto.budget.CreateBudgetRequestDto;
+import com.wanted.budget.guardian.app.web.dto.budget.RecommendBudgetRequestDto;
+import com.wanted.budget.guardian.app.web.dto.budget.RecommendBudgetResponseDto;
 import com.wanted.budget.guardian.common.config.security.context.LoginMember;
+import com.wanted.budget.guardian.common.response.ListResponse;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +61,18 @@ public class BudgetService {
 
     private Long getPerOfBudgetAmount(Long budgetAmount, Long totalAmount) {
         return budgetAmount * 100L / totalAmount;
+    }
+
+    /**
+     * 예산 추천
+     */
+    public ListResponse<RecommendBudgetResponseDto> recommendBudget(RecommendBudgetRequestDto body) {
+        Long totalBudget = body.getTotalBudget();
+
+        Map<Category, Double> averagePerOfBudgetPerCategory = budgetRepository.getAveragePerOfBudgetPerCategory();
+
+        List<RecommendBudgetResponseDto> RecommendBudgetResponseDtoList = RecommendBudgetResponseDto.listOf(totalBudget, averagePerOfBudgetPerCategory);
+        return ListResponse.of(RecommendBudgetResponseDtoList);
     }
 
 }
