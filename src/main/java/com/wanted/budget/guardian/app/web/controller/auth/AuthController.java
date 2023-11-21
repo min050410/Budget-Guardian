@@ -39,14 +39,16 @@ public class AuthController {
     @Operation(summary = "멤버 로그인")
     @PostMapping(ApiPath.LOGIN)
     public ResponseEntity<TokenResponseDto> login(
-        @Valid @RequestBody LoginRequestDto body) {
+        @Valid @RequestBody LoginRequestDto body
+    ) {
         return ResponseEntity.ok(authService.generateAccessAndRefreshToken(body));
     }
 
     @Operation(summary = "액세스토큰 재발급")
     @PostMapping(ApiPath.REFRESH_TOKEN)
     public ResponseEntity<AccessTokenResponseDto> generateAccessToken(
-        @Valid @RequestBody RefreshTokenRequestDto body) {
+        @Valid @RequestBody RefreshTokenRequestDto body
+    ) {
         return ResponseEntity.ok(authService.refreshAccessToken(body));
     }
 
@@ -61,7 +63,9 @@ public class AuthController {
 
     @Operation(summary = "토큰 유효성 확인")
     @GetMapping(ApiPath.VALIDATE_TOKEN)
-    public ResponseEntity<Void> validateToken(@AuthenticationPrincipal LoginMember loginMember) {
+    public ResponseEntity<Void> validateToken(
+        @AuthenticationPrincipal LoginMember loginMember
+    ) {
         return ResponseEntity.ok().build();
     }
 

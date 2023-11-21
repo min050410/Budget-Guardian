@@ -49,4 +49,9 @@ public class Budget extends BaseCreateTimeEntity {
         this.category = category;
     }
 
+    public void updateBudgetAmount(Long budgetAmount, Long perOfBudgetAmount) {
+        this.budgetAmount = budgetAmount;
+        this.perOfBudgetAmount = perOfBudgetAmount;
+    }
+
 }
