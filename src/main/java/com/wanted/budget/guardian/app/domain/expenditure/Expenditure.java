@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class Expenditure extends BaseCreateTimeEntity {
     private String memo;
 
     @Column(nullable = false)
-    @ColumnDefault("false")
+    @ColumnDefault("true")
     private boolean isIncludingExpenditure;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -46,12 +47,18 @@ public class Expenditure extends BaseCreateTimeEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @Column(nullable = false)
+    private LocalDateTime expenseTime;
+
+
     @Builder
-    public Expenditure(Long expense, String memo, Member member, Category category) {
+    public Expenditure(Long expense, String memo, Member member, Category category,
+        LocalDateTime expenseTime) {
         this.expense = expense;
         this.memo = memo;
         this.member = member;
         this.category = category;
+        this.expenseTime = expenseTime;
     }
 
     public boolean isAccessibleToExpenditure(Member member) {
