@@ -19,4 +19,7 @@ public class ApiPath {
     public static final String BUDGET = "/api/v1/budget";
     public static final String BUDGET_RECOMMEND = "/api/v1/budget/recommend";
 
+    // 지출
+    public static final String EXPENDITURE = "/api/v1/expenditure";
+
 }
