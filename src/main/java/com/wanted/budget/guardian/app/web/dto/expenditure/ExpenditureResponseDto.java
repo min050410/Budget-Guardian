@@ -33,7 +33,7 @@ public class ExpenditureResponseDto {
         return new ExpenditureResponseDto(
             expenditure.getId(),
             expenditure.getExpense(),
-            expenditure.isIncludingExpenditure(),
+            expenditure.isAllowsSumCalculation(),
             expenditure.getCategory().getValue(),
             expenditure.getExpenseTime()
         );

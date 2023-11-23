@@ -29,7 +29,7 @@ public class ExpenditureDetailResponseDto {
             expenditure.getId(),
             expenditure.getExpense(),
             expenditure.getMemo(),
-            expenditure.isIncludingExpenditure(),
+            expenditure.isAllowsSumCalculation(),
             expenditure.getCategory().getValue(),
             expenditure.getExpenseTime()
         );

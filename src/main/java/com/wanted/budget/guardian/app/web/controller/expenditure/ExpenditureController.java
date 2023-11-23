@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,6 +48,16 @@ public class ExpenditureController {
         @PathVariable Long expenditureId)
     {
         expenditureService.updateExpenditure(loginMember, body, expenditureId);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "지출 합계 포함 토글")
+    @PatchMapping(ApiPath.EXPENDITURE_ALLOWS_SUM_CALCULATION_TOGGLE)
+    public ResponseEntity<Void> toggleExpenditureAllowsSumCalculation(
+        @AuthenticationPrincipal LoginMember loginMember,
+        @PathVariable Long expenditureId)
+    {
+        expenditureService.toggleExpenditureAllowsSumCalculation(loginMember, expenditureId);
         return ResponseEntity.ok().build();
     }
 
