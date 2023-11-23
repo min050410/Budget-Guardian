@@ -37,7 +37,7 @@ public class Expenditure extends BaseCreateTimeEntity {
 
     @Column(nullable = false)
     @ColumnDefault("true")
-    private boolean isIncludingExpenditure;
+    private boolean isIncludingExpenditure = true;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
