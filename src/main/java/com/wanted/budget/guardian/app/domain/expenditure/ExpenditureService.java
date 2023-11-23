@@ -5,12 +5,18 @@ import com.wanted.budget.guardian.app.domain.category.CategoryService;
 import com.wanted.budget.guardian.app.domain.member.Member;
 import com.wanted.budget.guardian.app.domain.member.MemberService;
 import com.wanted.budget.guardian.app.web.dto.expenditure.CreateExpenditureRequestDto;
-import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureIdResponseDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureDetailResponseDto;
+import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureIdResponseDto;
+import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditurePagedResponse;
+import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureResponseDto;
+import com.wanted.budget.guardian.app.web.dto.expenditure.SearchExpenditureRequest;
+import com.wanted.budget.guardian.common.config.response.Pagination;
 import com.wanted.budget.guardian.common.config.security.context.LoginMember;
 import com.wanted.budget.guardian.common.exception.ExpenditureNotFoundException;
 import com.wanted.budget.guardian.common.exception.NotPossibleToAccessExpenditureException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +47,8 @@ public class ExpenditureService {
     /**
      * 지출 상세 조회
      */
-    public ExpenditureDetailResponseDto findExpenditureDetail(LoginMember loginMember, Long expenditureId) {
+    public ExpenditureDetailResponseDto findExpenditureDetail(LoginMember loginMember,
+        Long expenditureId) {
         Member member = memberService.findLoginMember(loginMember);
         Expenditure expenditure = findById(expenditureId);
 
@@ -58,4 +65,19 @@ public class ExpenditureService {
             .orElseThrow(ExpenditureNotFoundException::new);
     }
 
+    /**
+     * 지출 목록 조회
+     */
+    public ExpenditurePagedResponse findExpenditureBySearch(LoginMember loginMember,
+        SearchExpenditureRequest body) {
+        Member member = memberService.findLoginMember(loginMember);
+
+        Pagination pagination = Pagination.create(body.getPage(), body.getSize());
+        PageRequest pageRequest = pagination.toPageRequest();
+
+        Page<Expenditure> expenditureListBySearch = expenditureRepository.findExpenditureListBySearch(
+            body, member, pageRequest);
+
+        return ExpenditureResponseDto.pagedListOf(pagination, expenditureListBySearch);
+    }
 }
