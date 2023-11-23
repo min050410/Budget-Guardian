@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -58,6 +59,16 @@ public class ExpenditureController {
         @PathVariable Long expenditureId)
     {
         expenditureService.toggleExpenditureAllowsSumCalculation(loginMember, expenditureId);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "지출 기록 삭제")
+    @DeleteMapping(ApiPath.EXPENDITURE_DELETE)
+    public ResponseEntity<Void> deleteExpenditure(
+        @AuthenticationPrincipal LoginMember loginMember,
+        @PathVariable Long expenditureId)
+    {
+        expenditureService.expenditureDelete(loginMember, expenditureId);
         return ResponseEntity.ok().build();
     }
 
