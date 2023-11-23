@@ -61,28 +61,25 @@
 
 ### 🏷️ API
 
-#### Member(사용자)
+#### Member(사용자, 인증)
 
- Action    | Verbs |      URL Pattern      |
-|:----------|:-----:|:---------------------:|
+<img width="1432" alt="image" src="https://github.com/min050410/Budget-Guardian/assets/45661217/17b4af4a-8bb1-41d9-aacc-0c892d073249">
 
 
 #### Category(카테고리)
 
-| Action   | Verbs |       URL Pattern        |
-|:---------|:-----:|:------------------------:|
+<img width="1430" alt="image" src="https://github.com/min050410/Budget-Guardian/assets/45661217/179767e8-8e84-431c-88ea-3fb86a87fc32">
 
 
 #### Budget(예산)
 
-| Action | Verbs  |                      URL Pattern                      |
-|:------:|:------:|:-----------------------------------------------------:|
+<img width="1433" alt="image" src="https://github.com/min050410/Budget-Guardian/assets/45661217/8ccc9d1f-fec1-4fbb-8eb2-2bb0e29261f4">
 
 
 #### Expenditdure(지출)
 
-| Action    | Verbs |     URL Pattern      |
-|:----------|:-----:|:--------------------:|
+<img width="1433" alt="image" src="https://github.com/min050410/Budget-Guardian/assets/45661217/9647f4ee-8a2d-43aa-b8fd-8994d9ed7310">
+
 
 
 <br />
