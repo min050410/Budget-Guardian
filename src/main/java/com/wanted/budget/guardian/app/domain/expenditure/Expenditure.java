@@ -78,4 +78,8 @@ public class Expenditure extends BaseCreateTimeEntity {
         this.expenseTime = expenditure.expenseTime;
     }
 
+    public void toggleAllowsSumCalculation() {
+        this.allowsSumCalculation = !this.allowsSumCalculation;
+    }
+
 }

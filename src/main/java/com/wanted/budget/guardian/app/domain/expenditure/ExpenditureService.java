@@ -4,10 +4,10 @@ import com.wanted.budget.guardian.app.domain.category.Category;
 import com.wanted.budget.guardian.app.domain.category.CategoryService;
 import com.wanted.budget.guardian.app.domain.member.Member;
 import com.wanted.budget.guardian.app.domain.member.MemberService;
-import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureRequestDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureDetailResponseDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureIdResponseDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditurePagedResponse;
+import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureRequestDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureResponseDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.SearchExpenditureRequest;
 import com.wanted.budget.guardian.common.config.response.Pagination;
@@ -83,8 +83,12 @@ public class ExpenditureService {
         return ExpenditureResponseDto.pagedListOf(pagination, expenditureListBySearch);
     }
 
+    /**
+     * 지출 삭제
+     */
     @Transactional
-    public void updateExpenditure(LoginMember loginMember, ExpenditureRequestDto body, Long expenditureId) {
+    public void updateExpenditure(LoginMember loginMember, ExpenditureRequestDto body,
+        Long expenditureId) {
         Member member = memberService.findLoginMember(loginMember);
         Expenditure expenditure = findById(expenditureId);
         Category category = categoryService.findById(body.getCategoryId());
@@ -97,6 +101,19 @@ public class ExpenditureService {
         expenditure.update(requestExpenditure);
     }
 
+    /**
+     * 지출 합계 포함
+     */
+    @Transactional
+    public void toggleExpenditureAllowsSumCalculation(LoginMember loginMember, Long expenditureId) {
+        Member member = memberService.findLoginMember(loginMember);
+        Expenditure expenditure = findById(expenditureId);
 
+        if (!expenditure.isAccessibleToExpenditure(member)) {
+            throw new NotPossibleToAccessExpenditureException();
+        }
+
+        expenditure.toggleAllowsSumCalculation();
+    }
 
 }
