@@ -1,7 +1,7 @@
 package com.wanted.budget.guardian.app.web.controller.expenditure;
 
 import com.wanted.budget.guardian.app.domain.expenditure.ExpenditureService;
-import com.wanted.budget.guardian.app.web.dto.expenditure.CreateExpenditureRequestDto;
+import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureRequestDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureDetailResponseDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureIdResponseDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditurePagedResponse;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,9 +34,20 @@ public class ExpenditureController {
     @PostMapping(ApiPath.EXPENDITURE)
     public ResponseEntity<ExpenditureIdResponseDto> createExpenditure(
         @AuthenticationPrincipal LoginMember loginMember,
-        @Valid @RequestBody CreateExpenditureRequestDto body
+        @Valid @RequestBody ExpenditureRequestDto body
     ) {
         return ResponseEntity.ok(expenditureService.create(loginMember, body));
+    }
+
+    @Operation(summary = "지출 기록 수정")
+    @PutMapping(ApiPath.EXPENDITURE_UPDATE)
+    public ResponseEntity<Void> updateExpenditure(
+        @AuthenticationPrincipal LoginMember loginMember,
+        @Valid @RequestBody ExpenditureRequestDto body,
+        @PathVariable Long expenditureId)
+    {
+        expenditureService.updateExpenditure(loginMember, body, expenditureId);
+        return ResponseEntity.ok().build();
     }
 
     @Operation(summary = "지출 목록 조회")

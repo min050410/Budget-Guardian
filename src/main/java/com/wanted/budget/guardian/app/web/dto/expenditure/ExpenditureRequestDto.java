@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-public class CreateExpenditureRequestDto {
+public class ExpenditureRequestDto {
 
     @NotNull(message = "카테고리 id를 입력해주세요")
     @Schema(description = "카테고리 id")
