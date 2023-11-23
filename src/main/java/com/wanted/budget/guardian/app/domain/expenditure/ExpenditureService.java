@@ -4,7 +4,7 @@ import com.wanted.budget.guardian.app.domain.category.Category;
 import com.wanted.budget.guardian.app.domain.category.CategoryService;
 import com.wanted.budget.guardian.app.domain.member.Member;
 import com.wanted.budget.guardian.app.domain.member.MemberService;
-import com.wanted.budget.guardian.app.web.dto.expenditure.CreateExpenditureRequestDto;
+import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureRequestDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureDetailResponseDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditureIdResponseDto;
 import com.wanted.budget.guardian.app.web.dto.expenditure.ExpenditurePagedResponse;
@@ -33,8 +33,9 @@ public class ExpenditureService {
     /**
      * 지출 기록 생성
      */
+    @Transactional
     public ExpenditureIdResponseDto create(
-        LoginMember loginMember, CreateExpenditureRequestDto body) {
+        LoginMember loginMember, ExpenditureRequestDto body) {
         Member member = memberService.findLoginMember(loginMember);
         Category category = categoryService.findById(body.getCategoryId());
 
@@ -68,6 +69,7 @@ public class ExpenditureService {
     /**
      * 지출 목록 조회
      */
+    @Transactional(readOnly = true)
     public ExpenditurePagedResponse findExpenditureBySearch(LoginMember loginMember,
         SearchExpenditureRequest body) {
         Member member = memberService.findLoginMember(loginMember);
@@ -80,4 +82,21 @@ public class ExpenditureService {
 
         return ExpenditureResponseDto.pagedListOf(pagination, expenditureListBySearch);
     }
+
+    @Transactional
+    public void updateExpenditure(LoginMember loginMember, ExpenditureRequestDto body, Long expenditureId) {
+        Member member = memberService.findLoginMember(loginMember);
+        Expenditure expenditure = findById(expenditureId);
+        Category category = categoryService.findById(body.getCategoryId());
+
+        if (!expenditure.isAccessibleToExpenditure(member)) {
+            throw new NotPossibleToAccessExpenditureException();
+        }
+
+        Expenditure requestExpenditure = body.toExpenditure(member, category);
+        expenditure.update(requestExpenditure);
+    }
+
+
+
 }
