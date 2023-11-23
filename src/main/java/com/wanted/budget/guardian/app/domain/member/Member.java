@@ -28,8 +28,9 @@ public class Member extends BaseCreateTimeEntity {
     @Column(length = 100, nullable = false)
     private String password;
 
+    @Column(nullable = false)
     @ColumnDefault("0L")
-    private Long amount;
+    private Long amount = 0L;
 
     @Builder
     private Member(String username, String password) {

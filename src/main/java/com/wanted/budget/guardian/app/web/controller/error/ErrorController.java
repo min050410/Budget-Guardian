@@ -18,7 +18,8 @@ public class ErrorController {
             RequestMethod.GET,
             RequestMethod.DELETE,
             RequestMethod.PUT,
-            RequestMethod.POST
+            RequestMethod.POST,
+            RequestMethod.PATCH
         }
     )
     public void errorAuth(@RequestParam(value = "message") String message) {
