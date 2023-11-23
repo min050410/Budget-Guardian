@@ -71,4 +71,11 @@ public class Expenditure extends BaseCreateTimeEntity {
         return memberId.equals(loginMemberId);
     }
 
+    public void update(Expenditure expenditure) {
+        this.expense = expenditure.expense;
+        this.memo = expenditure.memo;
+        this.category = expenditure.category;
+        this.expenseTime = expenditure.expenseTime;
+    }
+
 }
