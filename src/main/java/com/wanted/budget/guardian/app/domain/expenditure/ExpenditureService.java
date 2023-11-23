@@ -116,4 +116,19 @@ public class ExpenditureService {
         expenditure.toggleAllowsSumCalculation();
     }
 
+    /**
+     * 지출 기록 삭제
+     */
+    @Transactional
+    public void expenditureDelete(LoginMember loginMember, Long expenditureId) {
+        Member member = memberService.findLoginMember(loginMember);
+        Expenditure expenditure = findById(expenditureId);
+
+        if (!expenditure.isAccessibleToExpenditure(member)) {
+            throw new NotPossibleToAccessExpenditureException();
+        }
+
+        expenditureRepository.delete(expenditure);
+    }
+
 }
