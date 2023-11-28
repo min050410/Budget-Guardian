@@ -22,9 +22,8 @@ public class MemberService {
     @Transactional
     public MemberIdResponseDto create(SignUpRequestDto body) {
         String encodedPassword = encodePassword(body.getPassword());
-        Member member = body.toMember(encodedPassword);
 
-        memberRepository.save(member);
+        Member member = memberRepository.save(body.toMember(encodedPassword));
         return MemberIdResponseDto.of(member.getId());
     }
 
